@@ -1,0 +1,32 @@
+<?php
+
+class Model_siswa extends CI_Model {
+
+    public $table ="tbl_siswa";
+    
+    function save() {
+        $data = array(
+            'nim'           => $this->input->post('nim', TRUE),
+            'kd_agama'      => $this->input->post('agama', TRUE),
+            'nama'          => $this->input->post('nama', TRUE),
+            'tanggal_lahir' => $this->input->post('tanggal_lahir', TRUE),
+            'tempat_lahir'  => $this->input->post('tempat_lahir', TRUE),
+            'gender'        => $this->input->post('gender', TRUE)
+        );
+        $this->db->insert($this->table,$data);
+    }
+    
+    function update() {
+        $data = array(
+            'nama'          => $this->input->post('nama', TRUE),
+            'kd_agama'      => $this->input->post('agama', TRUE),
+            'tanggal_lahir' => $this->input->post('tanggal_lahir', TRUE),
+            'tempat_lahir'  => $this->input->post('tempat_lahir', TRUE),
+            'gender'        => $this->input->post('gender', TRUE)
+        );
+        $nim   = $this->input->post('nim');
+        $this->db->where('nim',$nim);
+        $this->db->update($this->table,$data);
+    }
+
+}
