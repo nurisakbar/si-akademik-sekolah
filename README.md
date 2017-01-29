@@ -18,7 +18,7 @@ e.	Management Modul Data Kurikulum
 8.	Management Pengguna Sistem ( Admin Dan Guru )
 9.	Proses Authentifikasi Dan Proteksi Modul
 
-Bonuss Preorder :
+Bonuss Preorder :<br>
 1.	Pembahasan Modul Keuangan
 2.	Pembahasan Modul Sms Gateway
 3.	Penambahan Otoritas Pengguna Sistem ( Bagian Keuangan )
