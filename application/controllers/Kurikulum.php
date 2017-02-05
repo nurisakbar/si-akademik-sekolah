@@ -90,8 +90,9 @@ Class Kurikulum extends CI_Controller {
     
     function dataKurikulumDetail(){
         
-        $kd_jurusan = $_GET['jurusan'];
-        $kelas      = $_GET['kelas'];
+        $kd_jurusan     = $_GET['jurusan'];
+        $kelas          = $_GET['kelas'];
+        $id_kurikulum   = $_GET['id_kurikulum'];
         if($kelas=='semua_kelas'){
             $selected_kelas = '';
         }else{
@@ -111,7 +112,7 @@ Class Kurikulum extends CI_Controller {
         $sql = "SELECT tj.nama_jurusan,tm.kd_mapel,tm.nama_mapel,kd.kelas,kd.id_kurikulum_detail,kd.id_kurikulum
                 FROM tbl_kurikulum_detail as kd, tbl_kurikulum as tk,tbl_mapel as tm,tbl_jurusan as tj
                 WHERE kd.id_kurikulum=tk.id_kurikulum and kd.kd_mapel=tm.kd_mapel and kd.kd_jurusan=tj.kd_jurusan 
-                $selected_kelas and kd.kd_jurusan='$kd_jurusan'";
+                $selected_kelas and kd.id_kurikulum='$id_kurikulum' and kd.kd_jurusan='$kd_jurusan'";
         $kurikulum = $this->db->query($sql)->result();
         $no=1;
         foreach ($kurikulum as $row){

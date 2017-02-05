@@ -19,7 +19,10 @@
                             ?>
                         </select>
                     </td></tr>
-                <tr><td colspan="2"><?php echo anchor('kurikulum/adddetail/'.$this->uri->segment(3), '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Tambah Data', "title='Dambah Data' class='btn btn-danger btn-sm'"); ?></td></tr>
+                <tr><td colspan="2">
+                    <?php echo anchor('kurikulum/adddetail/'.$this->uri->segment(3), '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Tambah Data', "title='Dambah Data' class='btn btn-danger btn-sm'"); ?>
+                    <?php echo anchor('kurikulum','Kembali',"class='btn btn-success btn-sm'");?>
+                    </td></tr>
             </table>
         </div>
     </div>
@@ -62,7 +65,7 @@
         $.ajax({
             type:'GET',
             url :'<?php echo base_url() ?>index.php/kurikulum/dataKurikulumDetail',
-            data:'jurusan='+jurusan+'&kelas='+kelas,
+            data:'jurusan='+jurusan+'&kelas='+kelas+'&id_kurikulum=<?php echo $this->uri->segment(3)?>',
             success:function(html){
                 $("#tabel").html(html);
             }
