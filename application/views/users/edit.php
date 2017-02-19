@@ -24,54 +24,42 @@
         <div class="panel-body">
 
             <?php
-            echo form_open_multipart('siswa/edit', 'role="form" class="form-horizontal"');
-            echo form_hidden('nim', $siswa['nim']);
+            echo form_open_multipart('users/edit', 'role="form" class="form-horizontal"');
+            echo form_hidden('id_user',$user['id_user']);
             ?>
 
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="form-field-1">
-                    NIM
-                </label>
-                <div class="col-sm-9">
-                    <input type="text" value="<?php echo $siswa['nim'] ?>" readonly="" placeholder="MASUKAN NIM" id="form-field-1" class="form-control">
-                </div>
-            </div>
+
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
                     NAMA LENGKAP
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" value="<?php echo $siswa['nama'] ?>" name="nama" placeholder="MASUKAN NAMA LENGKAP" id="form-field-1" class="form-control">
+                    <input type="text" name="nama_lengkap" value="<?php echo $user['nama_lengkap'];?>" placeholder="MASUKAN NAMA LENGKAP" id="form-field-1" class="form-control">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
-                    TEMPAT, TGL LAHIR
+                    USERNAME
                 </label>
-                <div class="col-sm-5">
-                    <input type="text" name="tempat_lahir" value="<?php echo $siswa['tempat_lahir'] ?>" placeholder="TEMPAT LAHIR" id="form-field-1" class="form-control">
-                </div>
-                <div class="col-sm-2">
-                    <input type="date" value="<?php echo $siswa['tanggal_lahir'] ?>" name="tanggal_lahir" placeholder="TANGGAL LAHIR" id="form-field-1" class="form-control">
+                <div class="col-sm-9">
+                    <input type="text" name="username" value="<?php echo $user['username'];?>" placeholder="MASUKAN USERNAME" id="form-field-1" class="form-control">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
-                    GENDER
+                    PASSWORD
+                </label>
+                <div class="col-sm-9">
+                    <input type="password" name="password" placeholder="MASUKAN PASSWORD" id="form-field-1" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    LEVEL USER
                 </label>
                 <div class="col-sm-2">
                     <?php
-                    echo form_dropdown('gender', array('P' => 'LAKI LAKI', 'W' => 'PEREMPUAN'), $siswa['gender'], "class='form-control'");
-                    ?>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="form-field-1">
-                    AGAMA
-                </label>
-                <div class="col-sm-3">
-                    <?php
-                    echo cmb_dinamis('agama', 'tbl_agama', 'nama_agama', 'kd_agama', $siswa['kd_agama']);
+                    echo cmb_dinamis('id_level_user', 'tbl_level_user', 'nama_level', 'id_level_user',$user['id_level_user']);
                     ?>
                 </div>
             </div>
@@ -81,15 +69,7 @@
                 </label>
                 <div class="col-sm-2">
                     <input type="file" name="userfile">
-                    <img src="<?php echo base_url()."/uploads/".$siswa['foto']?>" width="200">
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-sm-2 control-label" for="form-field-1">
-                    PILIH ROMBEL
-                </label>
-                <div class="col-sm-6">
-                   <?php echo cmb_dinamis('rombel', 'tbl_rombel', 'nama_rombel', 'id_rombel',$siswa['id_rombel'])?>
+                    <img src="<?php echo base_url().'uploads/foto_user/'.$user['foto']?>" width="200">
                 </div>
             </div>
             <div class="form-group">
@@ -97,10 +77,10 @@
 
                 </label>
                 <div class="col-sm-1">
-                    <button type="submit" name="submit" class="btn btn-danger btn-sm">SIMPAN</button>
+                    <button type="submit" name="submit" class="btn btn-danger  btn-sm">SIMPAN</button>
                 </div>
                 <div class="col-sm-1">
-                    <?php echo anchor('siswa', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
+                    <?php echo anchor('users', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
                 </div>
             </div>
             </form>

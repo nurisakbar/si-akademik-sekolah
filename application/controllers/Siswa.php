@@ -8,7 +8,9 @@ Class Siswa extends CI_Controller {
         $this->load->model('Model_siswa');
     }
 
+    
     function data() {
+   
         // nama tabel
         $table = 'tbl_siswa';
         // nama PK
@@ -18,7 +20,11 @@ Class Siswa extends CI_Controller {
             array('db' => 'foto',
                 'dt' => 'foto',
                 'formatter' => function( $d) {
-                    return "<img src='http://www.cliptheme.com/preview/cliponeV2/Admin/clip-one-template/clip-one/assets/images/avatar-1-small.jpg'>";
+                   if(empty($d)){
+                       return "<img width='30px' src='".  base_url()."/uploads/user-siluet.jpg'>";
+                   }else{
+                       return "<img width='20px' src='".  base_url()."/uploads/".$d."'>";
+                   }   
                 }
             ),
             array('db' => 'nim', 'dt' => 'nim'),
@@ -54,7 +60,8 @@ Class Siswa extends CI_Controller {
 
     function add() {
         if (isset($_POST['submit'])) {
-            $this->Model_siswa->save();
+            $uploadFoto = $this->upload_foto_siswa();
+            $this->Model_siswa->save($uploadFoto);
             redirect('siswa');
         } else {
             $this->template->load('template', 'siswa/add');
@@ -63,7 +70,8 @@ Class Siswa extends CI_Controller {
     
     function edit(){
         if(isset($_POST['submit'])){
-            $this->Model_siswa->update();
+            $uploadFoto = $this->upload_foto_siswa();
+            $this->Model_siswa->update($uploadFoto);
             redirect('siswa');
         }else{
             $nim           = $this->uri->segment(3);
@@ -80,6 +88,17 @@ Class Siswa extends CI_Controller {
             $this->db->delete('tbl_siswa');
         }
         redirect('siswa');
+    }
+    
+    function upload_foto_siswa(){
+        $config['upload_path']          = './uploads/';
+        $config['allowed_types']        = 'jpg|png';
+        $config['max_size']             = 1024; // imb
+        $this->load->library('upload', $config);
+            // proses upload
+        $this->upload->do_upload('userfile');
+        $upload = $this->upload->data();
+        return $upload['file_name'];
     }
 
 }

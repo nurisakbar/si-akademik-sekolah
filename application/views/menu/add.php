@@ -24,73 +24,51 @@
         <div class="panel-body">
 
             <?php
-            echo form_open_multipart('siswa/add', 'role="form" class="form-horizontal"');
+            echo form_open('menu/add', 'role="form" class="form-horizontal"');
             ?>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
-                    NIM
+                    NAMA MENU
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" name="nim" placeholder="MASUKAN NIM" id="form-field-1" class="form-control">
+                    <input type="text" name="nama menu" placeholder="MASUKAN NAMA MENU" id="form-field-1" class="form-control">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
-                    NAMA LENGKAP
+                    LINK
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" name="nama" placeholder="MASUKAN NAMA LENGKAP" id="form-field-1" class="form-control">
+                    <input type="text" name="link" placeholder="MASUKAN LINK" id="form-field-1" class="form-control">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
-                    TEMPAT, TGL LAHIR
+                    ICON
                 </label>
-                <div class="col-sm-5">
-                    <input type="text" name="tempat_lahir" placeholder="TEMPAT LAHIR" id="form-field-1" class="form-control">
-                </div>
-                <div class="col-sm-2">
-                    <input type="date" name="tanggal_lahir" placeholder="TANGGAL LAHIR" id="form-field-1" class="form-control">
+                <div class="col-sm-9">
+                    <input type="text" name="icon" placeholder="MASUKAN KODE ICON" id="form-field-1" class="form-control">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
-                    GENDER
+                    IS MAIN MENU
                 </label>
-                <div class="col-sm-2">
-                    <?php
-                    echo form_dropdown('gender', array('P' => 'LAKI LAKI', 'W' => 'PEREMPUAN'), null, "class='form-control'");
-                    ?>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="form-field-1">
-                    AGAMA
-                </label>
-                <div class="col-sm-2">
-                    <?php
-                    echo cmb_dinamis('agama', 'tbl_agama', 'nama_agama', 'kd_agama');
-                    ?>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="form-field-1">
-                    Foto
-                </label>
-                <div class="col-sm-2">
-                    <input type="file" name="userfile">
+                <div class="col-sm-9">
+                    <select name="is_main_menu" class="form-control">
+                        <option value="0">MAIN MENU</option>
+                        <?php
+                        $menu = $this->db->get('tabel_menu');
+                        foreach ($menu->result() as $row){
+                            echo "<option value='$row->id'>$row->nama_menu</option>";
+                        }
+                        ?>
+                    </select>
+                    <?php //echo cmb_dinamis('is_main_menu', 'tabel_menu', 'nama_menu', 'id')?>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="form-field-1">
-                    PILIH ROMBEL
-                </label>
-                <div class="col-sm-6">
-                   <?php echo cmb_dinamis('rombel', 'tbl_rombel', 'nama_rombel', 'id_rombel')?>
-                </div>
-            </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">
 
@@ -99,7 +77,7 @@
                     <button type="submit" name="submit" class="btn btn-danger  btn-sm">SIMPAN</button>
                 </div>
                 <div class="col-sm-1">
-                    <?php echo anchor('siswa', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
+                    <?php echo anchor('menu', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
                 </div>
             </div>
             </form>

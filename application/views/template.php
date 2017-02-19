@@ -372,7 +372,7 @@
                         <li class="dropdown current-user">
                             <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
                                 <img src="http://www.cliptheme.com/preview/cliponeV2/Admin/clip-one-template/clip-one/assets/images/avatar-1-small.jpg" class="circle-img" alt="">
-                                <span class="username">Peter Clark</span>
+                                <span class="username"><?php echo $this->session->userdata('nama_lengkap') ?></span>
                                 <i class="fa fa-angle-down" aria-hidden="true"></i>
                             </a>
                             <ul class="dropdown-menu">
@@ -397,9 +397,11 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="login_example1.html">
-                                        <i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp;Log Out
-                                    </a>
+
+                                    <?php
+                                    echo anchor('auth/logout', '<i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp;Log Out');
+                                    ?>
+
                                 </li>
                             </ul>
                         </li>
@@ -459,7 +461,7 @@
                             }
                         }
                         ?>
-                        <li><a href="<?php echo base_url()?>/auth/logout"><i class="fa fa-sign-out"></i>LOGOUT</a></li>
+                        <li><a href="<?php echo base_url() ?>/auth/logout"><i class="fa fa-sign-out"></i>LOGOUT</a></li>
 
                     </ul>
                     <!-- end: MAIN NAVIGATION MENU -->
