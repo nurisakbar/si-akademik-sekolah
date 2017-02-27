@@ -23,5 +23,7 @@ class Model_rombel extends CI_Model {
         $this->db->where('id_rombel',$id_rombel);
         $this->db->update($this->table,$data);
     }
+    
+
 
 }

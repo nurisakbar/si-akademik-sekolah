@@ -93,5 +93,61 @@ Class Users extends CI_Controller {
     function rule(){
         $this->template->load('template','users/rule');
     }
+    
+    function modul(){
+        $level_user = $_GET['level_user'];
+        echo "<table id='mytable2' class='table table-striped table-bordered table-hover table-full-width dataTable'>
+                <thead>
+                    <tr>
+                        <th width='10'>NO</th>
+                        <th>NAMA MODULE</th>
+                        <th>LINK</th>
+                        <th width='100'>HAK AKSES</th>
+                    </tr>";
+        
+        $menu = $this->db->get('tabel_menu');
+        $no=1;
+        foreach ($menu->result() as $row){
+            echo "<tr>
+                <td>$no</td>
+                <td>".  strtoupper($row->nama_menu)."</td>
+                <td>$row->link</td>
+                <td align='center'><input type='checkbox' ";
+            $this->chek_akses($level_user, $row->id);
+             echo " onclick='addRule($row->id)'></td>
+                </tr>";
+            $no++;
+        }
+        
+        echo"</thead>
+            </table>";
+    }
+    
+    function chek_akses($level_user,$id_menu){
+        $data = array('id_level_user'=>$level_user,'id_menu'=>$id_menu);
+        $chek = $this->db->get_where('tbl_user_rule',$data);
+        if($chek->num_rows()>0){
+            echo "checked";
+        }
+    }
+
+
+
+
+    function addrule(){
+        $level_user = $_GET['level_user'];
+        $id_menu    = $_GET['id_menu'];
+        $data       = array('id_level_user'=>$level_user,'id_menu'=>$id_menu);
+        $chek       = $this->db->get_where('tbl_user_rule',$data);
+        if($chek->num_rows()<1){
+            $this->db->insert('tbl_user_rule',$data);
+            echo "berhasil memberikan akses modul";
+        }else{
+            $this->db->where('id_menu',$id_menu);
+            $this->db->where('id_level_user',$level_user);
+            $this->db->delete('tbl_user_rule');
+            echo " berhasil delete akses modul";
+        }
+    }
 
 }

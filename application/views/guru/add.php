@@ -52,6 +52,22 @@
                     <?php echo form_dropdown('gender', array('p' => 'LAKI LAKI', 'w' => 'PEREMPUAN'), '', "class='form-control'") ?>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    USERNAME
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" name="username" placeholder="MASUKAN USERNAME" id="form-field-1" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                    PASSWORD
+                </label>
+                <div class="col-sm-9">
+                    <input type="password" name="password" placeholder="MASUKAN PASSWORD" id="form-field-1" class="form-control">
+                </div>
+            </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="form-field-1">

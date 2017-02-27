@@ -20,5 +20,7 @@ class Model_jurusan extends CI_Model {
         $this->db->where('kd_jurusan',$kd_jurusan);
         $this->db->update($this->table,$data);
     }
+    
+    
 
 }

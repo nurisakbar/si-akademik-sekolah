@@ -83,5 +83,17 @@ Class Rombel extends CI_Controller {
         }
         redirect('rombel');
     }
+    
+    function show_combobox_rombel_by_jurusan(){
+        
+        $jurusan = $_GET['jurusan'];
+        echo "<select name='rombel' id='rombel2' class='form-control' onchange='loadSiswa()'>";
+        $this->db->where('kd_jurusan',$jurusan);
+        $rombel = $this->db->get('tbl_rombel');
+        foreach ($rombel->result() as $row){
+            echo "<option value='$row->id_rombel'>$row->nama_rombel</option>";
+        }
+        echo"</select>";
+    }
 
 }
