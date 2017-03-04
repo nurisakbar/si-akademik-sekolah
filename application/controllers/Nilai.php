@@ -28,4 +28,28 @@ class Nilai extends CI_Controller{
         $data['siswa']  =   $this->db->query($siswa)->result();
         $this->template->load('template','nilai/form_nilai',$data);
     }
+    
+ 
+    
+    function update_nilai(){
+        $nim        = $_GET['nim'];
+        $id_jadwal  = $_GET['id_jadwal'];
+        $nilai      = $_GET['nilai'];
+        
+        // parameter
+        $params = array('nim'=>$nim,'id_jadwal'=>$id_jadwal,'nilai'=>$nilai);
+        
+        $validasi = array('nim'=>$nim,'id_jadwal'=>$id_jadwal);
+        $chek = $this->db->get_where('tbl_nilai',$validasi);
+        if($chek->num_rows()>0){
+            // proses update
+            $this->db->where('nim',$nim);
+            $this->db->where('id_jadwal',$id_jadwal);
+            $this->db->update('tbl_nilai',array('nilai'=>$nilai));
+        }else{
+            // proses insert
+            $this->db->insert('tbl_nilai',$params);
+            echo "data sudah masuk";
+        }
+    }
 }

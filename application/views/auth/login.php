@@ -8,7 +8,7 @@
     <!--<![endif]-->
     <!-- start: HEAD -->
     <head>
-        <title>Clip-One - Responsive Admin Template</title>
+        <title>Login - Sistem Informasi Akademik</title>
         <!-- start: META -->
         <meta charset="utf-8" />
         <!--[if IE]><meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
@@ -44,10 +44,8 @@
             </div>
             <!-- start: LOGIN BOX -->
             <div class="box-login">
-                <h3>Sign in to your account</h3>
-                <p>
-                    Please enter your name and password to log in.
-                </p>
+                
+                
                 <?php echo form_open('auth/chek_login', 'class="form-login"'); ?>
                 <div class="errorHandler alert alert-danger no-display">
                     <i class="fa fa-remove-sign"></i> You have some form errors. Please check below.

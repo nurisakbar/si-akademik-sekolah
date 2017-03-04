@@ -26,7 +26,7 @@
                     
                     echo "<tr>  <td width='100'>$row->nim</td>
                                 <td>".  strtoupper($row->nama)."</td>
-                                <td width='150'><input type='int' name='nilai' class='form-control'></td></tr>";
+                                <td width='150'><input type='int' onKeyup='updateNilai(\"$row->nim\")' id='nilai".$row->nim."' value='".  chek_nilai($row->nim, $this->uri->segment(3))."' class='form-control'></td></tr>";
                 }
 ?>
             </table>
@@ -34,3 +34,20 @@
     </div>
     <!-- end: DYNAMIC TABLE PANEL -->
 </div>
+
+
+<script type="text/javascript">
+
+function updateNilai(nim){
+    var nilai = $("#nilai"+nim).val();
+    $.ajax({
+            type:'GET',
+            url :'<?php echo base_url() ?>index.php/nilai/update_nilai',
+            data:'nim='+nim+'&id_jadwal='+<?php echo $this->uri->segment(3)?>+'&nilai='+nilai,
+            success:function(html){
+                //$("#dataSiswa").html(html);
+            }
+        })
+}
+
+</script>

@@ -43,16 +43,15 @@
 
 
 <script type="text/javascript">
-    function updateDataWalikelas(){
-        var id_walikelas  = $("#kelas").val();
-        var id_guru = $("#jurusan").val();
+    function updateDataWalikelas(id_walikelas){
+        var id_guru = $("#guru"+id_walikelas).val();
         $.ajax({
             type:'GET',
             url :'<?php echo base_url() ?>index.php/walikelas/updateWalikelas',
-            data:'id_walikelas='+kelas+'&id_guru='+jurusan,
+            data:'id_walikelas='+id_walikelas+'&id_guru='+id_guru,
             success:function(html){
-                $("#showRombel").html(html);
-                loadPelajaran();
+                //$("#showRombel").html(html);
+                //loadPelajaran();
             }
         })
     }
