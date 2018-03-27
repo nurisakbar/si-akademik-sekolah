@@ -1,6 +1,10 @@
 <div class="col-md-12">
     <!-- start: DYNAMIC TABLE PANEL -->
-   
+   <?php echo anchor('siswa/add','Input Data Baru',array('class'=>'btn btn-danger btn-sm'))?>
+   <!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Import Data Excel Dari Dapodik</button>
+
+    <div style="margin-bottom: 10px;"></div>
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i> Dynamic Table
@@ -68,3 +72,27 @@
             } ).draw();
         } );
     </script>
+    <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Form Upload</h4>
+      </div>
+      <div class="modal-body">
+          <p>Silahkan pilih file excel hasil export data siswa dari aplikasi dapodik.</p>
+          <table class="table table-bordered">
+              <tr><td width="100">Pilih File</td><td><input type="file" name="file"></td></tr>
+          </table>
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-sm">Upload Data</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+
+  </div>
+</div>

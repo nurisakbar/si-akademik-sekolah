@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 02 Mar 2017 pada 00.27
+-- Generation Time: 23 Feb 2018 pada 10.41
 -- Versi Server: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -60,7 +60,9 @@ INSERT INTO `tabel_menu` (`id`, `nama_menu`, `link`, `icon`, `is_main_menu`) VAL
 (25, 'Raport Online', 'raport', 'fa fa-graduation-cap', 0),
 (26, 'SMS GATEWAY', 'sms', 'fa fa-envelope-o', 0),
 (27, 'phonebook', 'sms_group', 'fa fa-book', 26),
-(28, 'form sms', 'sms', 'fa fa-keyboard-o', 26);
+(28, 'form sms', 'sms', 'fa fa-keyboard-o', 26),
+(29, 'Laporan', 'keuangan', 'fa fa-desktop', 0),
+(30, 'Laporan', 'keuangan', 'fa fa-desktop', 0);
 
 -- --------------------------------------------------------
 
@@ -128,7 +130,7 @@ CREATE TABLE `tbl_guru` (
 
 INSERT INTO `tbl_guru` (`id_guru`, `nuptk`, `nama_guru`, `gender`, `username`, `password`) VALUES
 (1, '8728372382738273', 'drs diawan sst', 'p', '', ''),
-(2, '46676768686', 'nuris akbar sst', 'p', '', ''),
+(2, '46676768686', 'nuris akbar mkom', 'p', '', ''),
 (3, '4343434434343434', 'irma muliana sst mpd', 'w', '', ''),
 (4, '3434343232323', 'syamsuddin', 'w', 'udin123', '3af4c9341e31bce1f4262a326285170d');
 
@@ -206,8 +208,12 @@ CREATE TABLE `tbl_jenis_pembayaran` (
 --
 
 INSERT INTO `tbl_jenis_pembayaran` (`id_jenis_pembayaran`, `nama_jenis_pembayaran`) VALUES
-(1, 'spp'),
-(2, 'dsp');
+(1, 'SPP SEMESTER 1'),
+(2, 'DANA SUMBANGAN POKOK'),
+(3, 'SPP SEMESTER 2'),
+(4, 'SPP SEMESTER 3'),
+(5, 'SPP SEMESTER 4'),
+(6, 'SPP SEMESTER 5');
 
 -- --------------------------------------------------------
 
@@ -248,6 +254,27 @@ CREATE TABLE `tbl_jurusan` (
 INSERT INTO `tbl_jurusan` (`kd_jurusan`, `nama_jurusan`) VALUES
 ('RPL', 'REKAYASA PERANGKAT LUNAK'),
 ('TKJ', 'TEKNIK KOMPUTER JARINGAN');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_kelompok_mapel`
+--
+
+CREATE TABLE `tbl_kelompok_mapel` (
+  `id_kelompok_mapel` int(11) NOT NULL,
+  `nama_kelompok` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_kelompok_mapel`
+--
+
+INSERT INTO `tbl_kelompok_mapel` (`id_kelompok_mapel`, `nama_kelompok`) VALUES
+(1, 'Kelompok Wajib A'),
+(2, 'Kelompok Wajib B'),
+(3, 'Kelompok Wajib C'),
+(4, 'Permintaan');
 
 -- --------------------------------------------------------
 
@@ -371,6 +398,29 @@ INSERT INTO `tbl_nilai` (`id_nilai`, `id_jadwal`, `nim`, `nilai`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tbl_pembayaran`
+--
+
+CREATE TABLE `tbl_pembayaran` (
+  `id_pembayaran` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `nim` varchar(13) NOT NULL,
+  `id_jenis_pembayaran` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `keterangan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_pembayaran`
+--
+
+INSERT INTO `tbl_pembayaran` (`id_pembayaran`, `tanggal`, `nim`, `id_jenis_pembayaran`, `jumlah`, `keterangan`) VALUES
+(1, '2017-03-02', 'ti102132', 1, 100000, 'tidak ada'),
+(2, '2017-03-02', 'ti102132', 1, 100000, 'tidak ada');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tbl_phonebook`
 --
 
@@ -409,7 +459,8 @@ INSERT INTO `tbl_rombel` (`id_rombel`, `nama_rombel`, `kelas`, `kd_jurusan`) VAL
 (1, 'RPL1A', 1, 'RPL'),
 (2, 'RPL1B', 1, 'RPL'),
 (3, 'RPL2A', 3, 'RPL'),
-(4, 'RPL2B', 2, 'RPL');
+(4, 'RPL2B', 2, 'RPL'),
+(5, 'RPL2C', 2, 'RPL');
 
 -- --------------------------------------------------------
 
@@ -452,7 +503,7 @@ CREATE TABLE `tbl_sekolah_info` (
 --
 
 INSERT INTO `tbl_sekolah_info` (`id_sekolah`, `nama_sekolah`, `id_jenjang_sekolah`, `alamat_sekolah`, `email`, `telpon`) VALUES
-(1, 'SMK N 2 LANGSA', 3, 'JL AHMAD YANI NO 2, DESA PAYA BUJOK SELEUMAK, KOTA LANGSA - ACEH', 'smkn2langsa@sch.id', '02134235');
+(1, 'SMK N 2 LANGSA', 2, 'JL AHMAD YANI NO 2, DESA PAYA BUJOK SELEUMAK, KOTA LANGSA - ACEH', 'smkn2langsa@sch.id', '02134235');
 
 -- --------------------------------------------------------
 
@@ -592,7 +643,8 @@ INSERT INTO `tbl_user_rule` (`id_rule`, `id_menu`, `id_level_user`) VALUES
 (27, 24, 5),
 (28, 25, 3),
 (29, 26, 1),
-(30, 26, 5);
+(30, 26, 5),
+(31, 29, 5);
 
 -- --------------------------------------------------------
 
@@ -746,6 +798,12 @@ ALTER TABLE `tbl_jurusan`
   ADD PRIMARY KEY (`kd_jurusan`);
 
 --
+-- Indexes for table `tbl_kelompok_mapel`
+--
+ALTER TABLE `tbl_kelompok_mapel`
+  ADD PRIMARY KEY (`id_kelompok_mapel`);
+
+--
 -- Indexes for table `tbl_kurikulum`
 --
 ALTER TABLE `tbl_kurikulum`
@@ -774,6 +832,12 @@ ALTER TABLE `tbl_mapel`
 --
 ALTER TABLE `tbl_nilai`
   ADD PRIMARY KEY (`id_nilai`);
+
+--
+-- Indexes for table `tbl_pembayaran`
+--
+ALTER TABLE `tbl_pembayaran`
+  ADD PRIMARY KEY (`id_pembayaran`);
 
 --
 -- Indexes for table `tbl_phonebook`
@@ -843,7 +907,7 @@ ALTER TABLE `tbl_walikelas`
 -- AUTO_INCREMENT for table `tabel_menu`
 --
 ALTER TABLE `tabel_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `tbl_biaya_sekolah`
 --
@@ -868,12 +932,17 @@ ALTER TABLE `tbl_jadwal`
 -- AUTO_INCREMENT for table `tbl_jenis_pembayaran`
 --
 ALTER TABLE `tbl_jenis_pembayaran`
-  MODIFY `id_jenis_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_jenis_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbl_jenjang_sekolah`
 --
 ALTER TABLE `tbl_jenjang_sekolah`
   MODIFY `id_jenjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `tbl_kelompok_mapel`
+--
+ALTER TABLE `tbl_kelompok_mapel`
+  MODIFY `id_kelompok_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_kurikulum`
 --
@@ -895,6 +964,11 @@ ALTER TABLE `tbl_level_user`
 ALTER TABLE `tbl_nilai`
   MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
+-- AUTO_INCREMENT for table `tbl_pembayaran`
+--
+ALTER TABLE `tbl_pembayaran`
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `tbl_phonebook`
 --
 ALTER TABLE `tbl_phonebook`
@@ -903,7 +977,7 @@ ALTER TABLE `tbl_phonebook`
 -- AUTO_INCREMENT for table `tbl_rombel`
 --
 ALTER TABLE `tbl_rombel`
-  MODIFY `id_rombel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_rombel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tbl_sms_group`
 --
@@ -923,7 +997,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_user_rule`
 --
 ALTER TABLE `tbl_user_rule`
-  MODIFY `id_rule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_rule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `tbl_walikelas`
 --
